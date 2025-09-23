@@ -233,13 +233,14 @@
             text-align: center;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            line-height: 1.3;
+            line-height: 1.4;
             background: linear-gradient(135deg, var(--navy), var(--lavender));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             display: inline-block;
             width: 100%;
+            overflow: visible;
         }
 
         .section-subtitle {
@@ -258,6 +259,7 @@
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
+            width: 100%;
         }
 
         /* Card Styles - Minimal */
@@ -364,10 +366,12 @@
 
         .photo-row {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            justify-content: flex-start;
             gap: 1.5rem;
             margin-bottom: 2rem;
+            padding-bottom: 1rem;
         }
 
         .photo-row img {
@@ -376,6 +380,7 @@
             object-fit: cover;
             border: 2px solid var(--light-lavender);
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .photo-row img:hover {
@@ -1240,15 +1245,9 @@
                 $('.nav-link').removeClass('active');
                 $(`.nav-link[data-section="${targetSection}"]`).addClass('active');
                 
-                // Stop all animations first
-                $('.section').stop(true, true);
-                
-                // Hide all sections immediately
-                $('.section').hide().removeClass('active');
-                
-                // Show target section with single fade
-                const $targetSection = $(`#${targetSection}`);
-                $targetSection.addClass('active').fadeIn(400);
+                // Simple section switching without fade animation
+                $('.section').removeClass('active').hide();
+                $(`#${targetSection}`).addClass('active').show();
                 
                 // Smooth scroll to top
                 $('html, body').animate({
