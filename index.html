@@ -147,7 +147,6 @@
             text-align: center;
             max-width: 900px;
             padding: 0 20px;
-            animation: fadeInUp 1s ease;
         }
 
         .hero-name {
@@ -222,7 +221,6 @@
 
         .section.active {
             display: block;
-            animation: fadeIn 0.6s ease;
         }
 
         #home.active {
@@ -234,10 +232,14 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            line-height: 1.3;
             background: linear-gradient(135deg, var(--navy), var(--lavender));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: inline-block;
+            width: 100%;
         }
 
         .section-subtitle {
@@ -247,12 +249,15 @@
             font-size: 1.1rem;
         }
 
-        /* Grid Layout - Andreas Style */
+        /* Grid Layout - Andreas Style - Modified for vertical stacking */
         .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
             margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Card Styles - Minimal */
@@ -262,6 +267,7 @@
             border: 1px solid rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             cursor: pointer;
+            width: 100%;
         }
 
         .portfolio-card:hover {
@@ -297,7 +303,17 @@
 
         .card-description ul {
             list-style: none;
-            padding: 0;
+            padding-left: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-description ul ul {
+            padding-left: 1.5rem;
+            margin-top: 0.3rem;
+        }
+        
+        .card-description ul ul ul {
+            padding-left: 2.5rem;
         }
 
         .card-description li {
@@ -306,11 +322,66 @@
             margin-bottom: 0.8rem;
         }
 
-        .card-description li::before {
+        .card-description > ul > li::before {
             content: '▪';
             position: absolute;
             left: 0;
             color: var(--lavender);
+            font-size: 1.2rem;
+        }
+        
+        .card-description ul ul > li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--navy);
+            font-size: 1rem;
+        }
+        
+        .card-description ul ul ul > li::before {
+            content: '◦';
+            position: absolute;
+            left: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--white);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .photo-gallery-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .photo-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .photo-row img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 2px solid var(--light-lavender);
+            transition: all 0.3s ease;
+        }
+
+        .photo-row img:hover {
+            transform: scale(1.05);
+            border-color: var(--lavender);
+            box-shadow: 0 10px 20px rgba(177, 156, 217, 0.3);
         }
 
         /* Skills Section - Minimal Grid */
@@ -368,7 +439,7 @@
             transform: translateY(-2px);
         }
 
-        /* Contact Section */
+        /* Contact Section - Fixed Alignment */
         .contact-container {
             max-width: 800px;
             margin: 0 auto;
@@ -387,6 +458,11 @@
             background: var(--white);
             border: 1px solid rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .contact-item:hover {
@@ -407,10 +483,11 @@
             margin-bottom: 0.5rem;
         }
 
-        .contact-item a {
+        .contact-item a, .contact-item span {
             color: var(--text-light);
             text-decoration: none;
             transition: color 0.3s ease;
+            word-break: break-word;
         }
 
         .contact-item a:hover {
@@ -438,7 +515,6 @@
             position: relative;
             width: 50%;
             padding: 2rem;
-            animation: fadeInUp 0.6s ease;
         }
 
         .timeline-item:nth-child(odd) {
@@ -520,6 +596,11 @@
 
             .content-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .photo-row img {
+                width: 150px;
+                height: 150px;
             }
         }
 
@@ -900,10 +981,10 @@
                                         The user enters minigames by porting through entryways along the mountain path.
                                     </li>
                                     <li>
-                                        Minigames include the relaxing activity of “Skipping Stones,” where users gently toss pebbles across a pond to create ripples accompanied by calming sound effects.
+                                        Minigames include the relaxing activity of "Skipping Stones," where users gently toss pebbles across a pond to create ripples accompanied by calming sound effects.
                                     </li>
                                     <li>
-                                        At the conclusion of the experience atop the mountain, “Mandala Flow State” guides users in slow breathing patterns.
+                                        At the conclusion of the experience atop the mountain, "Mandala Flow State" guides users in slow breathing patterns.
                                     </li>
                                     <li>
                                         The various factors of the environmental weather (lighting, wind, etc) represent the change in Heart Rate Variability (HRV), while visual effects are modulated by the alpha metric, providing feedback on the transition to a focused relaxation state.
@@ -957,69 +1038,11 @@
                                 <li>Developed VR neurofeedback applications for mindfulness and stress management</li>
                                 <li>Authored technical documentation; translated EEG signal-processing concepts to non-technical stakeholders.</li>
                                 <li>Won 2nd place in Child Mind Institute's Challenge to create a single-session intervention (SSI) geared towards teens and pre-teens.
-                                    <li>"Beyond the Filter" is an SSI educating our target audience about the effects of GenAI on body image</li>
-                                    <li>It aims to promote digital literacy, boost agency and give teens more confidence in navigating the social media landscape.</li>
-                                    <li>You can access our report on "Beyond the Filter" <a href="Beyond_The_Filter.pdf" target="_blank" download="Beyond_The_Filter.pdf"></a>here.</li>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="portfolio-card">
-                        <div class="card-date">Aug 2016 - Dec 2021</div>
-                        <h3 class="card-title">Senior Software Engineer</h3>
-                        <p class="card-company">Bosch Global Software Technologies • Bengaluru, India</p>
-                        <div class="card-description">
-                            <ul>
-                                <li>Developed C++ navigation & routing features on embedded Linux; improved route calculation by 81%.</li>
-                                <li>Optimized algorithms for CPU efficiency; collaborated with product, integration, and QA teams.</li>
-                                <li>Led code reviews for 8-member team; reduced production defects 70% via memory-safe patterns.</li>
-                                <li>Mentored junior developers on debugging practices, embedded systems development, and coding standards.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <h2 class="section-title">Work & Research Experience</h2>
-            <p class="section-subtitle">Building the Future of Technology</p>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="portfolio-card">
-                        <div class="card-date">Jun 2025 - Present</div>
-                        <h3 class="card-title">AI Engineer Intern</h3>
-                        <p class="card-company">Clear Current • Remote (USA)</p>
-                        <div class="card-description">
-                            <ul>
-                                <li>Automated Python/MongoDB data pipelines for energy invoice validation.</li>
-                                <li>Benchmarked and fine-tuned LLMs for agentic AI workflows.</li>
-                                <li>Deployed solutions across AWS, GCP, and Azure platforms.</li>
-                                <li>Collaborated with cross-functional teams to integrate AI-driven solutions into enterprise platforms.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="portfolio-card">
-                        <div class="card-date">Mar 2024 - Jun 2025</div>
-                        <h3 class="card-title">AR/VR Research Assistant</h3>
-                        <p class="card-company">Healthcare Innovation Lab • SCU</p>
-                        <div class="card-description">
-                            <ul>
-                                <li>Developed VR neurofeedback applications for mindfulness and stress management</li>
-                                <li>Authored technical documentation; translated EEG signal-processing concepts to non-technical stakeholders.</li>
-                                <li>Won 2nd place in Child Mind Institute's Challenge to create a single-session intervention (SSI) geared towards teens and pre-teens.
-                                    <li>"Beyond the Filter" is an SSI educating our target audience about the effects of GenAI on body image</li>
-                                    <li>It aims to promote digital literacy, boost agency and give teens more confidence in navigating the social media landscape.</li>
-                                    <li>You can access our report on "Beyond the Filter" <a href="./Beyond_The_Filter.pdf" target="_blank" download="Beyond_The_Filter.pdf"></a>here.</li>
+                                    <ul>
+                                        <li>"Beyond the Filter" is an SSI educating our target audience about the effects of GenAI on body image</li>
+                                        <li>It aims to promote digital literacy, boost agency and give teens more confidence in navigating the social media landscape.</li>
+                                        <li>You can access our report on "Beyond the Filter" <a href="Beyond_The_Filter.pdf" target="_blank" download="Beyond_The_Filter.pdf">here.</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -1052,120 +1075,101 @@
             <h2 class="section-title">Arts</h2>
             <p class="section-subtitle">Because I'm Not A One Note Person (Musical Pun Intended).</p>
             
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="portfolio-card h-100">
-                        <h3 class="card-title">Music</h3>
-                        <div class="card-description">
-                            <p>Experienced vocalist with 13 years of training in Hindustani classical music.</p>
-                            <p>Skilled at singing other genres of music as well, including Indian film music, pop, rock, jazz, alternative, and Broadway.</p>
-                            <p>Performed at private concerts in and around India and the USA.</p>
-                            <p>You can check out some of my covers and original songs here!
-                                <ul>
-                                    <li>
-                                        <a href="https://www.youtube.com/watch?v=Ah1rS7xjU6Y&list=RDAh1rS7xjU6Y&start_radio=1" title="Cauvery Calling Theme" target="_blank">The Cauvery Calling Song</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.youtube.com/watch?v=xCdqem5Vvto" title="Poojisalende - Cover by Madhuri Sharma" target="_blank">Poojisalende - Cover by Madhuri Sharma</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.youtube.com/watch?v=N1cH5QEd0z8&list=PLjxtVijpL20jEDxobk1Dr1t759fohxQpr&index=7" title="Shallow - Cover by Madhuri Sharma" target="_blank">Shallow - Cover by Madhuri Sharma</a>
-                                    </li>
-                                    <li>
-                                        You can also find snippets of song covers and recordings on my Instagram page! <i class="fab fa-instagram"></i><a href="https://www.instagram.com/maddysharma94?igsh=MzRlODBiNWFlZA==" target="_blank" type="text/html">maddysharma94</a>
-                                    </li>
-                                </ul>
-                            </p>
-                        </div>
+            <div class="content-grid">
+                <div class="portfolio-card">
+                    <h3 class="card-title">Music</h3>
+                    <div class="card-description">
+                        <p>Experienced vocalist with 13 years of training in Hindustani classical music.</p>
+                        <p>Skilled at singing other genres of music as well, including Indian film music, pop, rock, jazz, alternative, and Broadway.</p>
+                        <p>Performed at private concerts in and around India and the USA.</p>
+                        <p>You can check out some of my covers and original songs here!
+                            <ul>
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=Ah1rS7xjU6Y&list=RDAh1rS7xjU6Y&start_radio=1" title="Cauvery Calling Theme" target="_blank">The Cauvery Calling Song</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=xCdqem5Vvto" title="Poojisalende - Cover by Madhuri Sharma" target="_blank">Poojisalende - Cover by Madhuri Sharma</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=N1cH5QEd0z8&list=PLjxtVijpL20jEDxobk1Dr1t759fohxQpr&index=7" title="Shallow - Cover by Madhuri Sharma" target="_blank">Shallow - Cover by Madhuri Sharma</a>
+                                </li>
+                                <li>
+                                    You can also find snippets of song covers and recordings on my Instagram page! <i class="fab fa-instagram"></i><a href="https://www.instagram.com/maddysharma94?igsh=MzRlODBiNWFlZA==" target="_blank" type="text/html">maddysharma94</a>
+                                </li>
+                            </ul>
+                        </p>
                     </div>
                 </div>
                 
-                <div class="col-md-6 mb-4">
-                    <div class="portfolio-card h-100">
-                        <h3 class="card-title">Writing</h3>
-                        <div class="card-description">
-                            <p>Skilled at writing poems, essays, and articles.</p>
-                            <p>Fun fact: I served as the editor of the school magazine! (2009 - 2012)</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 mb-4">
-                    <div class="portfolio-card h-100">
-                        <h3 class="card-title">Sketching and Painting</h3>
-                        <div class="card-description">
-                            <p>Have been painting since I was 10 years of age.</p>
-                            <p>Here are some of them below!</p>
-                            <img src="paintedbunting.jpeg" alt="Painted Bunting" height="500" width="500">
-                            <img src="scarabbeetle.jpeg" alt="Scarab Beetle" height="500" width="500">
-                            <img src="gouldianfinch.jpeg" alt="Gouldian Finch" height="500" width="500">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 mb-4">
-                    <div class="portfolio-card h-100">
-                        <h3 class="card-title">Photography</h3>
-                        <div class="card-description">
-                            <p>Interested in nature photography, especially bird and animal photography.</p>
-                            <p>Here are some bird photos shot by me!</p>
-                            <img src="hummingbird.jpeg" alt="Anna's Hummingbird" height="500" width="500">
-                            <img src="bluebird.jpeg" alt="Western Bluebird" height="500" width="500">
-                            <img src="pelican.jpeg" alt="American White Pelican" height="500" width="500">
-                            <img src="eagle.jpeg" alt="Bald Eagle" height="500" width="500">
-                        </div>
+                <div class="portfolio-card">
+                    <h3 class="card-title">Writing</h3>
+                    <div class="card-description">
+                        <p>Skilled at writing poems, essays, and articles.</p>
+                        <p>Fun fact: I served as the editor of the school magazine! (2009 - 2012)</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <h2 class="section-title">Leadership & Community</h2>
+            
+            <!-- Photo Gallery Section -->
+            <div class="photo-gallery">
+                <h3 class="photo-gallery-title">My Artwork & Photography</h3>
+                
+                <p class="text-center mb-3">Paintings - Some of my watercolor artwork</p>
+                <div class="photo-row">
+                    <img src="paintedbunting.jpeg" alt="Painted Bunting" title="Painted Bunting">
+                    <img src="scarabbeetle.jpeg" alt="Scarab Beetle" title="Scarab Beetle">
+                    <img src="gouldianfinch.jpeg" alt="Gouldian Finch" title="Gouldian Finch">
+                </div>
+                
+                <p class="text-center mb-3">Photography - Nature photography, especially birds</p>
+                <div class="photo-row">
+                    <img src="hummingbird.jpeg" alt="Anna's Hummingbird" title="Anna's Hummingbird">
+                    <img src="bluebird.jpeg" alt="Western Bluebird" title="Western Bluebird">
+                    <img src="pelican.jpeg" alt="American White Pelican" title="American White Pelican">
+                    <img src="eagle.jpeg" alt="Bald Eagle" title="Bald Eagle">
+                </div>
+            </div>
+            
+            <h2 class="section-title mt-5">Leadership & Community</h2>
             <p class="section-subtitle">Making an Impact Beyond Code</p>
             
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="portfolio-card h-100">
-                        <h3 class="card-title">Technical Communities</h3>
-                        <div class="card-description">
-                            <p>Active participant in Kaggle and Devpost competitions focused on AI/ML, AR/VR, 
-                            and Data Science. Consistently exploring cutting-edge technologies and applying 
-                            them to real-world challenges.</p>
-                        </div>
+            <div class="content-grid">
+                <div class="portfolio-card">
+                    <h3 class="card-title">Technical Communities</h3>
+                    <div class="card-description">
+                        <p>Active participant in Kaggle and Devpost competitions focused on AI/ML, AR/VR, 
+                        and Data Science. Consistently exploring cutting-edge technologies and applying 
+                        them to real-world challenges.</p>
                     </div>
                 </div>
                 
-                <div class="col-md-6 mb-4">
-                    <div class="portfolio-card h-100">
-                        <h3 class="card-title">Rewriting the Code</h3>
-                        <div class="card-description">
-                            <p>Member advancing women in technology through collaboration, mentorship, and 
-                            advocacy. Working to promote diversity and inclusion in the tech industry.</p>
-                        </div>
+                <div class="portfolio-card">
+                    <h3 class="card-title">Rewriting the Code</h3>
+                    <div class="card-description">
+                        <p>Member advancing women in technology through collaboration, mentorship, and 
+                        advocacy. Working to promote diversity and inclusion in the tech industry.</p>
                     </div>
                 </div>
                 
-                <div class="col-md-6 mb-4">
-                    <div class="portfolio-card h-100">
-                        <h3 class="card-title">Education Volunteer</h3>
-                        <div class="card-description">
-                            <p>Tutored Computer Science for underprivileged children in Indian schools, 
-                            helping bridge the digital divide and inspire the next generation of technologists.</p>
-                        </div>
+                <div class="portfolio-card">
+                    <h3 class="card-title">Education Volunteer</h3>
+                    <div class="card-description">
+                        <p>Tutored Computer Science for underprivileged children in Indian schools, 
+                        helping bridge the digital divide and inspire the next generation of technologists.</p>
                     </div>
                 </div>
                 
-                <div class="col-md-6 mb-4">
-                    <div class="portfolio-card h-100">
-                        <h3 class="card-title">Passion Projects</h3>
-                        <div class="card-description">
-                            <p>Building immersive AR/VR experiences and AI/ML applications with global reach, 
-                            especially in healthcare, education, environment, gaming, and the arts.</p>
-                        </div>
+                <div class="portfolio-card">
+                    <h3 class="card-title">Passion Projects</h3>
+                    <div class="card-description">
+                        <p>Building immersive AR/VR experiences and AI/ML applications with global reach, 
+                        especially in healthcare, education, environment, gaming, and the arts.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
@@ -1193,7 +1197,7 @@
                     <div class="contact-item">
                         <i class="fab fa-linkedin"></i>
                         <h4>LinkedIn</h4>
-                        <a href="https://https://www.linkedin.com/in/madhuri-sharma-1611b3237/" target="_blank">madhuri-sharma-1611b3237</a>
+                        <a href="https://www.linkedin.com/in/madhuri-sharma-1611b3237/" target="_blank">madhuri-sharma-1611b3237</a>
                     </div>
                     
                     <div class="contact-item">
@@ -1225,7 +1229,7 @@
                 $('#loader').addClass('hidden');
             }, 1000);
             
-            // Smooth scrolling and section switching
+            // Smooth scrolling and section switching - FIXED VERSION
             $('.nav-link, .hero-link').click(function(e) {
                 e.preventDefault();
                 
@@ -1236,20 +1240,20 @@
                 $('.nav-link').removeClass('active');
                 $(`.nav-link[data-section="${targetSection}"]`).addClass('active');
                 
-                // Hide all sections with fade out
-                $('.section').fadeOut(300, function() {
-                    $(this).removeClass('active');
-                    
-                    // Show target section with fade in
-                    $(`#${targetSection}`).fadeIn(300, function() {
-                        $(this).addClass('active');
-                    });
-                });
+                // Stop all animations first
+                $('.section').stop(true, true);
+                
+                // Hide all sections immediately
+                $('.section').hide().removeClass('active');
+                
+                // Show target section with single fade
+                const $targetSection = $(`#${targetSection}`);
+                $targetSection.addClass('active').fadeIn(400);
                 
                 // Smooth scroll to top
                 $('html, body').animate({
                     scrollTop: 0
-                }, 600);
+                }, 400);
             });
             
             // Navbar scroll effect
@@ -1267,27 +1271,15 @@
                 $('body').css('background-position-y', -(scrolled * 0.5) + 'px');
             });
             
-            // Card hover animations
+            // Card hover animations - smooth without bounce
             $('.portfolio-card, .contact-item').hover(
                 function() {
-                    $(this).stop().animate({
-                        marginTop: '-5px'
-                    }, 200);
+                    $(this).css('transform', 'translateY(-5px)');
                 },
                 function() {
-                    $(this).stop().animate({
-                        marginTop: '0px'
-                    }, 200);
+                    $(this).css('transform', 'translateY(0)');
                 }
             );
-            
-            // Skill tag animations
-            $('.skill-tag').each(function(index) {
-                $(this).delay(index * 50).animate({
-                    opacity: 1,
-                    transform: 'translateY(0)'
-                }, 500);
-            });
             
             // Timeline animation on scroll
             const observeElements = function() {
