@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madhuri Sharma - Portfolio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts for Aptos fallback -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'Aptos';
+            src: local('Aptos'), local('Aptos Display'), local('Segoe UI Variable Display');
+            font-weight: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1e3a5f;
+            --lavender: #b19cd9;
+            --peach: #ffb6a3;
+            --light-lavender: #e6defc;
+            --dark-navy: #0f1f35;
+            --text-primary: #2c3e50;
+            --text-light: #6c757d;
+            --white: #ffffff;
+            --gray-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Aptos', 'Segoe UI Variable Display', 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, 
+                var(--navy) 0%, 
+                var(--lavender) 50%, 
+                var(--peach) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Metallic sheen overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 40%, 
+                rgba(255, 255, 255, 0.15) 50%, 
+                transparent 60%);
+            animation: sheen 8s infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes sheen {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+
+        /* Navigation - Minimal Style */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--navy) !important;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            color: var(--text-primary) !important;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.5rem 1.2rem !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--navy), var(--lavender));
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 70%;
+        }
+
+        .nav-link.active {
+            color: var(--navy) !important;
+        }
+
+        /* Hero Section - Andreas Style */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-name {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--navy), var(--lavender), var(--peach));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-link {
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--navy);
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .hero-link:hover {
+            background: var(--navy);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .hero-link.primary {
+            background: linear-gradient(135deg, var(--navy), var(--lavender));
+            color: var(--white);
+            border: none;
+        }
+
+        .hero-link.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(177, 156, 217, 0.3);
+        }
+
+        /* Section Styles */
+        .section {
+            min-height: 100vh;
+            padding: 100px 0 50px;
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            position: relative;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        #home.active {
+            display: flex;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--navy), var(--lavender));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+
+        /* Grid Layout - Andreas Style */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Card Styles - Minimal */
+        .portfolio-card {
+            background: var(--white);
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .card-company {
+            color: var(--lavender);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .card-description ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-description li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-description li::before {
+            content: '▪';
+            position: absolute;
+            left: 0;
+            color: var(--lavender);
+        }
+
+        /* Skills Section - Minimal Grid */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .skill-group {
+            text-align: center;
+        }
+
+        .skill-group h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .skill-group h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--lavender), var(--peach));
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.4rem 1rem;
+            background: var(--gray-bg);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(135deg, var(--lavender), var(--peach));
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+            background: var(--white);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--lavender);
+            margin-bottom: 1rem;
+        }
+
+        .contact-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--lavender);
+        }
+
+        /* Timeline for Experience */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--navy), var(--lavender), var(--peach));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 2rem;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: var(--white);
+            border: 3px solid var(--lavender);
+            border-radius: 50%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-name {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 60px !important;
+                padding-right: 20px !important;
+                text-align: left !important;
+            }
+
+            .timeline-dot {
+                left: 20px !important;
+                right: auto !important;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--gray-bg);
+            border-top-color: var(--lavender);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">Madhuri Sharma</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-section="home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="about">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="experience">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="extracurriculars">Extracurriculars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero-content">
+            <h1 class="hero-name">HI! I'M MADHURI.</h1>
+            <p class="hero-title">SOFTWARE ENGINEER • AI/ML SPECIALIST • AR/VR INNOVATOR</p>
+            <p class="hero-description">
+                Crafting next-generation software solutions at the intersection of artificial intelligence,
+                augmented reality, and cloud computing. With expertise spanning from embedded systems to
+                enterprise AI, I transform complex challenges into elegant, scalable solutions.
+            </p>
+            <div class="hero-links">
+                <a href="#" class="hero-link primary" data-section="projects">View Projects</a>
+                <a href="#" class="hero-link" data-section="contact">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">Driving Innovation Through Technology</p>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="about-content">
+                        <p class="lead mb-4">
+                            I am a results-driven Software Engineer with expertise in AI/ML, AR/VR, Cloud Computing, 
+                            and Mobile Application Development. I obtained my M.S. in Computer Science and Engineering at 
+                            Santa Clara University. I bring both academic excellence and industry experience 
+                            from my roles at Clear Current and Bosch Global Software Technologies.
+                        </p>
+                        <p class="lead mb-4">
+                            You can access my resume <a href="Madhuri Sharma - ATS Compliant Resume.pdf" type="text/pdf" target="_blank" download="Resume of Madhuri Sharma.pdf">here.</a>
+                        </p>
+                        
+                        <div class="row mt-5">
+                            <div class="col-md-6">
+                                <h4 class="mb-3">Professional Focus</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Enterprise AI/ML Solutions</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Cloud Architecture (AWS, GCP, Azure)</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>AR/VR Application Development</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Full-Stack Development</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="mb-3">Core Values</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-heart text-danger me-2"></i>Digital Literacy for All</li>
+                                    <li class="mb-2"><i class="fas fa-heart text-danger me-2"></i>Ethics in Technology</li>
+                                    <li class="mb-2"><i class="fas fa-heart text-danger me-2"></i>Equality in STEM</li>
+                                    <li class="mb-2"><i class="fas fa-heart text-danger me-2"></i>Community Building</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 p-4" style="background: linear-gradient(135deg, rgba(177, 156, 217, 0.1), rgba(255, 182, 163, 0.1)); border-left: 4px solid var(--lavender);">
+                            <h4 class="mb-3">Education</h4>
+                            <h5 style="color: var(--navy);">Master of Science in Computer Science and Engineering</h5>
+                            <p class="mb-1">Santa Clara University • Sep 2023 - Jun 2025</p>
+                            <p class="text-muted mb-2">GPA: 3.61</p>
+                            <p><strong>Coursework:</strong> Data Structures & Algorithms, Advanced OS, Cloud Computing, 
+                            Mobile App Development, ML/DL, NLP, HCI, AI & Ethics</p>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                            <span class="badge bg-primary p-3 fs-6">
+                                <i class="fas fa-award me-2"></i>AWS Certified AI Practitioner (2025)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">Comprehensive Technology Stack</p>
+            
+            <div class="skills-container">
+                <div class="skill-group">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Dart</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Node.js</span>
+                    </div>
+                </div>
+                
+                <div class="skill-group">
+                    <h3>AI/ML</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">LLM</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">NLP</span>
+                        <span class="skill-tag">Deep Learning</span>
+                        <span class="skill-tag">AI Agents</span>
+                    </div>
+                </div>
+                
+                <div class="skill-group">
+                    <h3>Cloud & DevOps</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">GCP</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+                
+                <div class="skill-group">
+                    <h3>AR/VR and Computer Vision</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Unity3D</span>
+                        <span class="skill-tag">Meta Quest SDK</span>
+                        <span class="skill-tag">Grokit Core</span>
+                        <span class="skill-tag">YOLOv8</span>
+                        <span class="skill-tag">BlazePose</span>
+                    </div>
+                </div>
+                
+                <div class="skill-group">
+                    <h3>Mobile & Web</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">Bootstrap</span>
+                        <span class="skill-tag">REST APIs</span>
+                    </div>
+                </div>
+                
+                <div class="skill-group">
+                    <h3>Engineering</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microservices</span>
+                        <span class="skill-tag">System Design</span>
+                        <span class="skill-tag">Agile/Scrum</span>
+                        <span class="skill-tag">Code Review</span>
+                        <span class="skill-tag">Testing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <p class="section-subtitle">Innovation in Action</p>
+            
+            <div class="content-grid">
+                <div class="portfolio-card">
+                    <div class="card-date">Apr 2025 - Present</div>
+                    <h3 class="card-title">Voxure: The Multimodal GenAI Vocal Coach</h3>
+                    <p class="card-company">Personal Project</p>
+                    <div class="card-description">
+                        <ul>
+                            <li>Developed cross-platform Flutter application using Computer Vision, LLMs, and Retrieval-augmented Generation (RAG) to deliver real-time multimodal vocal coaching.</li>
+                            <li>Achieved 90-95% accuracy in posture and voice evaluation using optimized PyTorch models</li>
+                            <li>Current Feature Set:
+                                <ul>
+                                    <li>Vocal coaching module (in text/audio/video/multimodal format), which has:
+                                        <ul>
+                                            <li>Camera + video input handler for capturing real-time video recordings and processing pre-recorded videos.</li>
+                                            <li>ML pipeline (augmented with a pose estimation engine) analyzing and evaluating user posture frame-by-frame from the video or recording.</li>
+                                            <li>Voice input handler capturing and processing vocals, to correlate with posture.</li>
+                                            <li>LLM-generated coaching and advice (marked by timestamps and audio cues, to indicate where in the performance the improvement should take place).</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Progress tracker (incorporating suggestions generated, as well as subsequent videos/recordings by the user) to record improvement in posture and vocal technique over time.
+                                    </li>
+                                    <li>
+                                        Personalized coaching according to:
+                                        <ul>
+                                            <li>Genre (eg: pop, rock, Broadway, jazz, etc.)</li>
+                                            <li>Role (eg: lead vocalist, backing vocalist, chorus singer, etc.)</li>
+                                            <li>Range (eg: mezzo-soprano, alto, tenor, etc.)</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Features yet to be included:
+                                <ul>
+                                    <li>Timely reminders for practice sessions or for taking a break, as well as key lessons learnt from previous sessions.</li>
+                                    <li>Generated personalized, pre-performance warmup exercises.</li>
+                                    <li>Community features (blogs with comment sections, messaging, and one-on-one video/voice calls with vocal coaches/experts, etc.).</li>
+                                </ul>
+                            </li>
+                            <li>You can access the project <a href="https://github.com/madsysharma/voxure_flet_app" target="_blank" type="text/html">here.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="card-date">Sept 2024 - Dec 2024</div>
+                    <h3 class="card-title">Odyssey: The Mobile App for Solo Travelers</h3>
+                    <p class="card-company">Academic Project ("Mobile Application Development" course)</p>
+                    <div class="card-description">
+                        <ul>
+                            <li>Created the "Connect" module for destination discovery & reviewing, and traveler networking.</li>
+                            <li>Implemented scalable architecture with optimized sorting algorithms.</li>
+                            <li>Resolved complex IAM integration issues across multiple technology layers.</li>
+                            <li>Designed custom Google Cloud Functions for messaging/emailing and database operations.</li>
+                            <li>Applied design principles like BLoC to produce maintainable, scalable and efficient code.</li>
+                            <li>You can access the project <a href="https://github.com/madsysharma/CSEN268-Group7-OdysseyMobileApp" target="_blank" type="text/html">here.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="card-date">Apr 2024 - Jul 2024</div>
+                    <h3 class="card-title">Abstractive Summarization of News Articles</h3>
+                    <p class="card-company">Academic Project ("Natural Language Processing" course)</p>
+                    <div class="card-description">
+                        <ul>
+                            <li>Fine-tuned HuggingFace transformers (BART, Pegasus, Marian)</li>
+                            <li>Improved ROUGE scores by 38-800% and BLEU scores by 97-515%</li>
+                            <li>Researched and applied neural network optimization techniques and evaluation metrics.</li>
+                            <li>You can access the project report <a href="Abstractive_Summarization.pdf" target="_blank" download="Abstractive_Summarization.pdf">here.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="card-date">Apr 2024 - Jul 2024</div>
+                    <h3 class="card-title">Secure P2P Storage for OpenStack</h3>
+                    <p class="card-company">Academic Project ("Cloud Computing" course)</p>
+                    <div class="card-description">
+                        <ul>
+                            <li>Implemented P2P architecture with Sechord algorithm to enhance security.</li>
+                            <li>Improved file transfer, upload and download speeds by 80%.</li>
+                            <li>Quick detection of suspicious activity achieved.</li>
+                            <li>You can access the project <a href="https://github.com/madsysharma/Secure-OpenStack-Peer-to-Peer-Object-Storage-System" target="_blank" type="text/html">here.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="card-date">Mar 2024 - Jun 2025</div>
+                    <h3 class="card-title">Mandala Flow State</h3>
+                    <p class="card-company">Research Project (Healthcare Innovation and Design Lab, Santa Clara University)</p>
+                    <div class="card-description">
+                        <ul>
+                            <li>Overview: this application combines Virtual Reality with neurofeedback to boost immersion for mindfulness practices.</li>
+                            <li>How it works:
+                                <ul>
+                                    <li>The VR application (developed on Unity) is a generative 3D Mandala and soundscape to bring the user to a focused, relaxed state.</li>
+                                    <li>An oscillating cloud in the middle of the screen helps to guide the user's breathing.</li>
+                                    <li>Using an electroencephalography (EEG) powered device, raw EEG data is collected from two (frontal) electrodes. A Python script preprocesses the data to clean it and eliminate any noise.</li>
+                                    <li>The power of brain activity in the alpha frequency band (which reflects a relaxed and alert state) is extracted from the cleaned data and is used to compute a feature indicating the user's level of focus and relaxation.</li>
+                                    <li>The computed feature is then wirelessly transmitted to the VR headset where it is represented in the form of the aforementioned cloud. With such a continuous feedback loop over the span of seven minutes, the user is guided to a focused and relaxed state owing to the changing opacity and size of the cloud (which increase with an increase in alpha frequency activity).</li>
+                                </ul>
+                            </li>
+                            <li>My roles and responsibilities:
+                                <ul>
+                                    <li>Data extraction and preprocessing</li>
+                                    <li>Created a new feature where the user can input the number of sessions using a new keypad scene:
+                                        <ul>
+                                            <li>Based on the number of sessions completed, the cloud's starting opacity and diameter is adjusted.</li>
+                                        </ul>
+                                </li>
+                                </ul>
+                            </li>
+                            <li>The project overview, written by my mentor, Dr. Julia Scott can be found <a href="https://www.linkedin.com/pulse/mandala-flow-state-shifting-path-from-biomedical-sciences-julia-scott/" target="_blank" type="text/html">here</a>.</li>
+                            <li>You can also find the original research paper <a href="https://direct.mit.edu/leon/article/55/3/219/106884/Transformation-of-Buddhist-Mandalas-into-a-Virtual" target="_blank" type="text/html">here</a>.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="card-date">Mar 2024 - Jun 2025</div>
+                    <h3 class="card-title">Fabled Forest: An Immersive Experience for Stress Management Using Biofeedback and Gesture Control</h3>
+                    <p class="card-company">Research Project (Healthcare Innovation and Design Lab, Santa Clara University)</p>
+                    <div class="card-description">
+                        <ul>
+                            <li>Overview: an original virtual reality (VR) application that combines open-world game design, gesture-based user interaction, and biofeedback to modulate the user's physiological and psychological states in an interactive and immersive experience.</li>
+                            <li>Design:
+                                <ul>
+                                    <li>
+                                        Users explore a mountainous rainforest through natural gestures, free from the constraints of traditional controllers.
+                                    </li>
+                                    <li>
+                                        The user enters minigames by porting through entryways along the mountain path.
+                                    </li>
+                                    <li>
+                                        Minigames include the relaxing activity of “Skipping Stones,” where users gently toss pebbles across a pond to create ripples accompanied by calming sound effects.
+                                    </li>
+                                    <li>
+                                        At the conclusion of the experience atop the mountain, “Mandala Flow State” guides users in slow breathing patterns.
+                                    </li>
+                                    <li>
+                                        The various factors of the environmental weather (lighting, wind, etc) represent the change in Heart Rate Variability (HRV), while visual effects are modulated by the alpha metric, providing feedback on the transition to a focused relaxation state.
+                                    </li>
+                                    <li>
+                                        As each minigame is completed, a layer of the mandala is acquired, which progressively creates the traditional nine-layer architecture.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Presented at the MeaningfulXR conference of 2025 (held at UC Davis)</li>
+                            <li>Code and poster available on approved request only (please contact Dr. Julia Scott: jscott1@scu.edu)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Work & Research Experience</h2>
+            <p class="section-subtitle">Building the Future of Technology</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="portfolio-card">
+                        <div class="card-date">Jun 2025 - Present</div>
+                        <h3 class="card-title">AI Engineer Intern</h3>
+                        <p class="card-company">Clear Current • Remote (USA)</p>
+                        <div class="card-description">
+                            <ul>
+                                <li>Automated Python/MongoDB data pipelines for energy invoice validation.</li>
+                                <li>Benchmarked and fine-tuned LLMs for agentic AI workflows.</li>
+                                <li>Deployed solutions across AWS, GCP, and Azure platforms.</li>
+                                <li>Collaborated with cross-functional teams to integrate AI-driven solutions into enterprise platforms.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="portfolio-card">
+                        <div class="card-date">Mar 2024 - Jun 2025</div>
+                        <h3 class="card-title">AR/VR Research Assistant</h3>
+                        <p class="card-company">Healthcare Innovation Lab • SCU</p>
+                        <div class="card-description">
+                            <ul>
+                                <li>Developed VR neurofeedback applications for mindfulness and stress management</li>
+                                <li>Authored technical documentation; translated EEG signal-processing concepts to non-technical stakeholders.</li>
+                                <li>Won 2nd place in Child Mind Institute's Challenge to create a single-session intervention (SSI) geared towards teens and pre-teens.
+                                    <li>"Beyond the Filter" is an SSI educating our target audience about the effects of GenAI on body image</li>
+                                    <li>It aims to promote digital literacy, boost agency and give teens more confidence in navigating the social media landscape.</li>
+                                    <li>You can access our report on "Beyond the Filter" <a href="Beyond_The_Filter.pdf" target="_blank" download="Beyond_The_Filter.pdf"></a>here.</li>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="portfolio-card">
+                        <div class="card-date">Aug 2016 - Dec 2021</div>
+                        <h3 class="card-title">Senior Software Engineer</h3>
+                        <p class="card-company">Bosch Global Software Technologies • Bengaluru, India</p>
+                        <div class="card-description">
+                            <ul>
+                                <li>Developed C++ navigation & routing features on embedded Linux; improved route calculation by 81%.</li>
+                                <li>Optimized algorithms for CPU efficiency; collaborated with product, integration, and QA teams.</li>
+                                <li>Led code reviews for 8-member team; reduced production defects 70% via memory-safe patterns.</li>
+                                <li>Mentored junior developers on debugging practices, embedded systems development, and coding standards.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Work & Research Experience</h2>
+            <p class="section-subtitle">Building the Future of Technology</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="portfolio-card">
+                        <div class="card-date">Jun 2025 - Present</div>
+                        <h3 class="card-title">AI Engineer Intern</h3>
+                        <p class="card-company">Clear Current • Remote (USA)</p>
+                        <div class="card-description">
+                            <ul>
+                                <li>Automated Python/MongoDB data pipelines for energy invoice validation.</li>
+                                <li>Benchmarked and fine-tuned LLMs for agentic AI workflows.</li>
+                                <li>Deployed solutions across AWS, GCP, and Azure platforms.</li>
+                                <li>Collaborated with cross-functional teams to integrate AI-driven solutions into enterprise platforms.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="portfolio-card">
+                        <div class="card-date">Mar 2024 - Jun 2025</div>
+                        <h3 class="card-title">AR/VR Research Assistant</h3>
+                        <p class="card-company">Healthcare Innovation Lab • SCU</p>
+                        <div class="card-description">
+                            <ul>
+                                <li>Developed VR neurofeedback applications for mindfulness and stress management</li>
+                                <li>Authored technical documentation; translated EEG signal-processing concepts to non-technical stakeholders.</li>
+                                <li>Won 2nd place in Child Mind Institute's Challenge to create a single-session intervention (SSI) geared towards teens and pre-teens.
+                                    <li>"Beyond the Filter" is an SSI educating our target audience about the effects of GenAI on body image</li>
+                                    <li>It aims to promote digital literacy, boost agency and give teens more confidence in navigating the social media landscape.</li>
+                                    <li>You can access our report on "Beyond the Filter" <a href="./Beyond_The_Filter.pdf" target="_blank" download="Beyond_The_Filter.pdf"></a>here.</li>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="portfolio-card">
+                        <div class="card-date">Aug 2016 - Dec 2021</div>
+                        <h3 class="card-title">Senior Software Engineer</h3>
+                        <p class="card-company">Bosch Global Software Technologies • Bengaluru, India</p>
+                        <div class="card-description">
+                            <ul>
+                                <li>Developed C++ navigation & routing features on embedded Linux; improved route calculation by 81%.</li>
+                                <li>Optimized algorithms for CPU efficiency; collaborated with product, integration, and QA teams.</li>
+                                <li>Led code reviews for 8-member team; reduced production defects 70% via memory-safe patterns.</li>
+                                <li>Mentored junior developers on debugging practices, embedded systems development, and coding standards.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extracurriculars Section -->
+    <section id="extracurriculars" class="section">
+        <div class="container">
+            <h2 class="section-title">Arts</h2>
+            <p class="section-subtitle">Because I'm Not A One Note Person (Musical Pun Intended).</p>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="portfolio-card h-100">
+                        <h3 class="card-title">Music</h3>
+                        <div class="card-description">
+                            <p>Experienced vocalist with 13 years of training in Hindustani classical music.</p>
+                            <p>Skilled at singing other genres of music as well, including Indian film music, pop, rock, jazz, alternative, and Broadway.</p>
+                            <p>Performed at private concerts in and around India and the USA.</p>
+                            <p>You can check out some of my covers and original songs here!
+                                <ul>
+                                    <li>
+                                        <a href="https://www.youtube.com/watch?v=Ah1rS7xjU6Y&list=RDAh1rS7xjU6Y&start_radio=1" title="Cauvery Calling Theme" target="_blank">The Cauvery Calling Song</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.youtube.com/watch?v=xCdqem5Vvto" title="Poojisalende - Cover by Madhuri Sharma" target="_blank">Poojisalende - Cover by Madhuri Sharma</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.youtube.com/watch?v=N1cH5QEd0z8&list=PLjxtVijpL20jEDxobk1Dr1t759fohxQpr&index=7" title="Shallow - Cover by Madhuri Sharma" target="_blank">Shallow - Cover by Madhuri Sharma</a>
+                                    </li>
+                                    <li>
+                                        You can also find snippets of song covers and recordings on my Instagram page! <i class="fab fa-instagram"></i><a href="https://www.instagram.com/maddysharma94?igsh=MzRlODBiNWFlZA==" target="_blank" type="text/html">maddysharma94</a>
+                                    </li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="portfolio-card h-100">
+                        <h3 class="card-title">Writing</h3>
+                        <div class="card-description">
+                            <p>Skilled at writing poems, essays, and articles.</p>
+                            <p>Fun fact: I served as the editor of the school magazine! (2009 - 2012)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="portfolio-card h-100">
+                        <h3 class="card-title">Sketching and Painting</h3>
+                        <div class="card-description">
+                            <p>Have been painting since I was 10 years of age.</p>
+                            <p>Here are some of them below!</p>
+                            <img src="paintedbunting.jpeg" alt="Painted Bunting" height="500" width="500">
+                            <img src="scarabbeetle.jpeg" alt="Scarab Beetle" height="500" width="500">
+                            <img src="gouldianfinch.jpeg" alt="Gouldian Finch" height="500" width="500">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="portfolio-card h-100">
+                        <h3 class="card-title">Photography</h3>
+                        <div class="card-description">
+                            <p>Interested in nature photography, especially bird and animal photography.</p>
+                            <p>Here are some bird photos shot by me!</p>
+                            <img src="hummingbird.jpeg" alt="Anna's Hummingbird" height="500" width="500">
+                            <img src="bluebird.jpeg" alt="Western Bluebird" height="500" width="500">
+                            <img src="pelican.jpeg" alt="American White Pelican" height="500" width="500">
+                            <img src="eagle.jpeg" alt="Bald Eagle" height="500" width="500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Leadership & Community</h2>
+            <p class="section-subtitle">Making an Impact Beyond Code</p>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="portfolio-card h-100">
+                        <h3 class="card-title">Technical Communities</h3>
+                        <div class="card-description">
+                            <p>Active participant in Kaggle and Devpost competitions focused on AI/ML, AR/VR, 
+                            and Data Science. Consistently exploring cutting-edge technologies and applying 
+                            them to real-world challenges.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="portfolio-card h-100">
+                        <h3 class="card-title">Rewriting the Code</h3>
+                        <div class="card-description">
+                            <p>Member advancing women in technology through collaboration, mentorship, and 
+                            advocacy. Working to promote diversity and inclusion in the tech industry.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="portfolio-card h-100">
+                        <h3 class="card-title">Education Volunteer</h3>
+                        <div class="card-description">
+                            <p>Tutored Computer Science for underprivileged children in Indian schools, 
+                            helping bridge the digital divide and inspire the next generation of technologists.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="portfolio-card h-100">
+                        <h3 class="card-title">Passion Projects</h3>
+                        <div class="card-description">
+                            <p>Building immersive AR/VR experiences and AI/ML applications with global reach, 
+                            especially in healthcare, education, environment, gaming, and the arts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Let's Build Something Amazing Together!</p>
+            
+            <div class="contact-container">
+                <p class="lead text-center mb-5">
+                    I'm always interested in discussing new opportunities and collaborative ventures in AI/ML, AR/VR, and software engineering.
+                </p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <a href="mailto:mmsharma.official@gmail.com">mmsharma.official@gmail.com</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <h4>Phone</h4>
+                        <a href="tel:+16103141121">+1 (610) 314-1121</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <h4>LinkedIn</h4>
+                        <a href="https://https://www.linkedin.com/in/madhuri-sharma-1611b3237/" target="_blank">madhuri-sharma-1611b3237</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <h4>GitHub</h4>
+                        <a href="https://github.com/madsysharma" target="_blank">madsysharma</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Location</h4>
+                        <span>San Jose, CA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Hide loader after page loads
+            setTimeout(function() {
+                $('#loader').addClass('hidden');
+            }, 1000);
+            
+            // Smooth scrolling and section switching
+            $('.nav-link, .hero-link').click(function(e) {
+                e.preventDefault();
+                
+                const targetSection = $(this).data('section');
+                if (!targetSection) return;
+                
+                // Update active nav
+                $('.nav-link').removeClass('active');
+                $(`.nav-link[data-section="${targetSection}"]`).addClass('active');
+                
+                // Hide all sections with fade out
+                $('.section').fadeOut(300, function() {
+                    $(this).removeClass('active');
+                    
+                    // Show target section with fade in
+                    $(`#${targetSection}`).fadeIn(300, function() {
+                        $(this).addClass('active');
+                    });
+                });
+                
+                // Smooth scroll to top
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 600);
+            });
+            
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+            
+            // Parallax effect
+            $(window).scroll(function() {
+                const scrolled = $(window).scrollTop();
+                $('body').css('background-position-y', -(scrolled * 0.5) + 'px');
+            });
+            
+            // Card hover animations
+            $('.portfolio-card, .contact-item').hover(
+                function() {
+                    $(this).stop().animate({
+                        marginTop: '-5px'
+                    }, 200);
+                },
+                function() {
+                    $(this).stop().animate({
+                        marginTop: '0px'
+                    }, 200);
+                }
+            );
+            
+            // Skill tag animations
+            $('.skill-tag').each(function(index) {
+                $(this).delay(index * 50).animate({
+                    opacity: 1,
+                    transform: 'translateY(0)'
+                }, 500);
+            });
+            
+            // Timeline animation on scroll
+            const observeElements = function() {
+                const windowHeight = $(window).height();
+                const scrollTop = $(window).scrollTop();
+                
+                $('.timeline-item').each(function() {
+                    const elementTop = $(this).offset().top;
+                    if (elementTop < scrollTop + windowHeight - 100) {
+                        $(this).addClass('animated');
+                    }
+                });
+            };
+            
+            $(window).on('scroll', observeElements);
+            observeElements();
+            
+            // Initialize tooltips
+            $('[data-bs-toggle="tooltip"]').tooltip();
+            
+            // Mobile menu close on click
+            $('.navbar-nav .nav-link').click(function() {
+                $('.navbar-collapse').collapse('hide');
+            });
+            
+            // Add typing effect to hero name
+            const heroName = $('.hero-name');
+            const text = heroName.text();
+            heroName.text('');
+            let index = 0;
+            
+            const typeWriter = function() {
+                if (index < text.length) {
+                    heroName.text(heroName.text() + text.charAt(index));
+                    index++;
+                    setTimeout(typeWriter, 50);
+                }
+            };
+            
+            setTimeout(typeWriter, 1200);
+        });
+    </script>
+</body>
+</html>
