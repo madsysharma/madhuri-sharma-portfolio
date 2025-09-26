@@ -641,6 +641,22 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Multilingual Greeting Animation */
+        #greeting-text {
+            display: inline-block;
+            transition: opacity 0.5s ease-in-out;
+            min-width: 120px;
+            text-align: left;
+        }
+        
+        #greeting-text.fade-out {
+            opacity: 0;
+        }
+        
+        #greeting-text.fade-in {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -687,7 +703,7 @@
     <!-- Home Section -->
     <section id="home" class="section active">
         <div class="hero-content">
-            <h1 class="hero-name">HI! I'M MADHURI.</h1>
+            <h1 class="hero-name"><span id="greeting-text">HI!</span> I'M MADHURI.</h1>
             <p class="hero-title">SOFTWARE ENGINEER • AI/ML SPECIALIST • AR/VR INNOVATOR</p>
             <p class="hero-description">
                 Crafting next-generation software solutions at the intersection of artificial intelligence,
@@ -1320,6 +1336,45 @@
             };
             
             setTimeout(typeWriter, 1200);
+            
+            // Multilingual greeting animation
+            const greetings = [
+                { text: 'HI!', lang: 'English' },
+                { text: '¡HOLA!', lang: 'Spanish' },
+                { text: 'नमस्ते!', lang: 'Hindi' },
+                { text: 'ನಮಸ್ಕಾರ!', lang: 'Kannada' },
+                { text: 'BONJOUR!', lang: 'French' },
+                { text: '你好!', lang: 'Mandarin' },
+                { text: 'HALLO!', lang: 'German' },
+                { text: 'CIAO!', lang: 'Italian' }
+            ];
+            
+            let greetingIndex = 0;
+            const greetingElement = $('#greeting-text');
+            
+            function changeGreeting() {
+                // Fade out
+                greetingElement.addClass('fade-out');
+                
+                setTimeout(() => {
+                    // Change text
+                    greetingIndex = (greetingIndex + 1) % greetings.length;
+                    greetingElement.text(greetings[greetingIndex].text);
+                    
+                    // Fade in
+                    greetingElement.removeClass('fade-out');
+                    greetingElement.addClass('fade-in');
+                }, 500);
+                
+                setTimeout(() => {
+                    greetingElement.removeClass('fade-in');
+                }, 1000);
+            }
+            
+            // Start the greeting animation after the typing effect completes
+            setTimeout(() => {
+                setInterval(changeGreeting, 3000); // Change every 3 seconds
+            }, 2000);
         });
     </script>
 </body>
