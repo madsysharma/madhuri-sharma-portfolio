@@ -642,20 +642,13 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Multilingual Greeting Animation */
+        /* Fix for multilingual greeting display */
         #greeting-text {
             display: inline-block;
-            transition: opacity 0.5s ease-in-out;
-            min-width: 120px;
-            text-align: left;
-        }
-        
-        #greeting-text.fade-out {
-            opacity: 0;
-        }
-        
-        #greeting-text.fade-in {
-            opacity: 1;
+            line-height: 1.3;
+            vertical-align: baseline;
+            overflow: visible;
+            padding-bottom: 0.1em; /* Small padding to prevent cutoff */
         }
     </style>
 </head>
@@ -703,7 +696,7 @@
     <!-- Home Section -->
     <section id="home" class="section active">
         <div class="hero-content">
-            <h1 class="hero-name"><span id="greeting-text">HI!</span> I'M MADHURI.</h1>
+            <h1 class="hero-name"></h1>
             <p class="hero-title">SOFTWARE ENGINEER • AI/ML SPECIALIST • AR/VR INNOVATOR</p>
             <p class="hero-description">
                 Crafting next-generation software solutions at the intersection of artificial intelligence,
@@ -1323,58 +1316,69 @@
             
             // Add typing effect to hero name
             const heroName = $('.hero-name');
-            const text = heroName.text();
-            heroName.text('');
+            const fullText = "HI! I'M MADHURI.";
             let index = 0;
             
             const typeWriter = function() {
-                if (index < text.length) {
-                    heroName.text(heroName.text() + text.charAt(index));
+                if (index < fullText.length) {
+                    heroName.text(heroName.text() + fullText.charAt(index));
                     index++;
                     setTimeout(typeWriter, 50);
+                } else {
+                    // Typing complete, now restructure for multilingual animation
+                    setTimeout(startMultilingualAnimation, 1000);
                 }
             };
             
+            // Start typing after a short delay
             setTimeout(typeWriter, 1200);
             
-            // Multilingual greeting animation
-            const greetings = [
-                { text: 'HI!', lang: 'English' },
-                { text: '¡HOLA!', lang: 'Spanish' },
-                { text: 'नमस्ते!', lang: 'Hindi' },
-                { text: 'ನಮಸ್ಕಾರ!', lang: 'Kannada' },
-                { text: 'BONJOUR!', lang: 'French' },
-                { text: '你好!', lang: 'Mandarin' },
-                { text: 'HALLO!', lang: 'German' },
-                { text: 'CIAO!', lang: 'Italian' }
-            ];
-            
-            let greetingIndex = 0;
-            const greetingElement = $('#greeting-text');
-            
-            function changeGreeting() {
-                // Fade out
-                greetingElement.addClass('fade-out');
+            // Function to start multilingual animation
+            function startMultilingualAnimation() {
+                // Restructure the HTML to separate greeting word from exclamation and name
+                heroName.html('<span id="greeting-text">HI</span>! I\'M MADHURI.');
                 
-                setTimeout(() => {
-                    // Change text
-                    greetingIndex = (greetingIndex + 1) % greetings.length;
-                    greetingElement.text(greetings[greetingIndex].text);
+                // Multilingual greeting array (without exclamation marks)
+                const greetings = [
+                    { text: 'HI', lang: 'English' },
+                    { text: '¡HOLA', lang: 'Spanish' },  // Keep the inverted exclamation for Spanish
+                    { text: 'नमस्ते', lang: 'Hindi' },
+                    { text: 'ನಮಸ್ಕಾರ', lang: 'Kannada' },
+                    { text: 'BONJOUR', lang: 'French' },
+                    { text: '你好', lang: 'Mandarin' },
+                    { text: 'HALLO', lang: 'German' },
+                    { text: 'CIAO', lang: 'Italian' }
+                ];
+                
+                let greetingIndex = 0;  // Start at 0 (English is already shown)
+                const greetingElement = $('#greeting-text');
+                
+                // Set initial transition property
+                greetingElement.css({
+                    'transition': 'opacity 0.5s ease-in-out',
+                    'display': 'inline-block',
+                    'line-height': '1.2',
+                    'vertical-align': 'baseline',
+                    'overflow': 'visible'
+                });
+                
+                function changeGreeting() {
+                    // Fade out
+                    greetingElement.css('opacity', '0');
                     
-                    // Fade in
-                    greetingElement.removeClass('fade-out');
-                    greetingElement.addClass('fade-in');
-                }, 500);
+                    setTimeout(() => {
+                        // Move to next greeting
+                        greetingIndex = (greetingIndex + 1) % greetings.length;
+                        greetingElement.text(greetings[greetingIndex].text);
+                        
+                        // Fade in
+                        greetingElement.css('opacity', '1');
+                    }, 500);
+                }
                 
-                setTimeout(() => {
-                    greetingElement.removeClass('fade-in');
-                }, 1000);
-            }
-            
-            // Start the greeting animation after the typing effect completes
-            setTimeout(() => {
+                // Start cycling through greetings
                 setInterval(changeGreeting, 3000); // Change every 3 seconds
-            }, 2000);
+            }
         });
     </script>
 </body>
